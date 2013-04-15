@@ -1,0 +1,8 @@
+#!/bin/sh
+
+home=$HOME
+cwd=$(pwd)
+
+ln -sf $cwd/_tmux.conf $home/.tmux.conf
+
+exit 0
