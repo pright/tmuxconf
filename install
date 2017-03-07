@@ -1,12 +1,20 @@
 #!/bin/sh
 
-home=$HOME
-cwd=$(pwd)
+TMUX_CONF=$HOME/.tmux.conf
+TPM=$HOME/.tmux/plugins/tpm
+CWD=$(pwd)
 
-ln -sf $cwd/_tmux.conf $home/.tmux.conf
-git clone https://github.com/tmux-plugins/tpm $home/.tmux/plugins/tpm
 
-echo 'Press C-b I to install plugins in tmux.'
+if [ $(echo "$(tmux -V | cut -c 6-) >= 1.9" | bc) -eq 1 ]; then
+    ln -sf $CWD/_tmux.conf $TMUX_CONF
+    if [ ! -d $TPM ]; then
+        git clone https://github.com/tmux-plugins/tpm $TPM
+    fi
+    echo 'Press C-b I to install plugins in tmux.'
+else
+    ln -sf $CWD/_tmux_legacy.conf $TMUX_CONF
+fi
+echo 'Install xsel or xclip to enable copying features in tmux.'
 sleep 2
 tmux
 exit 0
