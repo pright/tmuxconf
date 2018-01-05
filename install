@@ -4,6 +4,7 @@ TMUX_CONF=$HOME/.tmux.conf
 TPM=$HOME/.tmux/plugins/tpm
 CWD=$(pwd)
 
+ln -sf $CWD/_tmux_line.conf $HOME/.tmux_line.conf
 
 if [ $(echo "$(tmux -V | cut -c 6-) >= 1.9" | bc) -eq 1 ]; then
     ln -sf $CWD/_tmux.conf $TMUX_CONF
