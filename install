@@ -6,12 +6,12 @@ CWD=$(pwd)
 
 ln -sf $CWD/_tmux_line.conf $HOME/.tmux_line.conf
 
-if [ $(echo "$(tmux -V | cut -c 6-) >= 1.9" | bc) -eq 1 ]; then
+if [ $(echo "$(tmux -V | cut -c 6-8) >= 1.9" | bc) -eq 1 ]; then
     ln -sf $CWD/_tmux.conf $TMUX_CONF
     if [ ! -d $TPM ]; then
         git clone https://github.com/tmux-plugins/tpm $TPM
+        $TPM/bin/install_plugins
     fi
-    echo 'Press C-b I to install plugins in tmux.'
 else
     ln -sf $CWD/_tmux_legacy.conf $TMUX_CONF
 fi
